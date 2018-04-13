@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Base and Limit Registers</title>
+  <meta charset="utf-8">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type = "text/javascript" src="BL.js"></script>
+  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div class="container-fluid">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">Memory Management</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a>Base & Limit Registers</a></li>
+          <li><a href="../Segmentation/segmentationIndex.html">Segmentation</a></li>
+          <li><a href="../Paging/pagingIndex.html">Paging</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <div class="row" style="padding-left: 30px; padding-bottom:10px">
+      <div class="col-md-4">
+        <div id="data"></div>
+      </div>
+      <div class="col-md-8">
+        <div class="btn-group">
+          <button id="saveBtn" class="btn btn-default" type="button" onclick="save();">Save</button>
+          <div class="btn-group">
+            <div class="dropdown">          
+              <button id="loadBtn" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >Load <b class="caret"></b></button>
+              <ul class="dropdown-menu" aria-labelledby="loadBtn">
+                <li><a data-toggle="modal" data-target="#fileModal">Load From File</a></li>
+                <li><a class="dropdown-item" onClick="loadExample();">Load Example</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    <div class="col-md-4" id="mainMemoryColumn">
+  
+      <button id="editMemory" type="button" class="btn btn-primary" style="margin-left:10px" data-toggle="modal" data-target="#editMemoryModal"> Edit Process Memory</button>
+      <button id="setup" type="button" class="btn btn-primary" style="margin-left:10px" data-toggle="modal" data-target="#setupModal">Setup</button>
+    
+      <div id="mainMemory"></div>
+       
+    </div>
+  
+    <div class="col-md-4" id="infoColumn">
+      
+      
+      <div id="nextInstrButton" hidden>
+        <button id="runNextInstruction"  class="btn btn-success" type="button" onClick="runInstr();">Run Next Instruction</button>
+        <button id="resetSim"  class="btn btn-success" type="button" onClick="resetSim();">Reset Simulation</button>
+      </div>
+      
+      <div id="baselimit"></div>
+      
+    </div>
+    
+    
+    <div class="col-md-4"id="instructionColumn">
+       <button id="editInstructions" type="button" class="btn btn-primary" style="margin-right:10px" data-toggle="modal" data-target="#editInstructionsModal">Edit Instructions</button>
+       <div id="instructions"></div>
+    </div>
+  </div>
+  
+  <!-- MODALS-->
+  
+  <div id="setupModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Setup</h4>
+        </div>
+        <div class="modal-body">
+          Memory allocation policy: 
+          <select id="memAllocPolicy">
+            <option value="Best Fit">Best Fit</option>
+            <option value="Worst Fit">Worst Fit</option>
+            <option value="First Fit">First Fit</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" onClick="saveSetup();" >Save</button>
+        </div>
+      </div>   
+    </div>
+  </div>
+  
+  
+  <div id="editMemoryModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Process Memory</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table" id="processMemoryTable">
+            <thead>
+              <tr>
+                <th>Process ID</th>
+                <th>Process Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="process0">
+                <td> 
+                  <input type="text" id="procID0" placeholder="Process ID" style='text-transform:uppercase' class="form-control"/>
+                </td>
+                <td> 
+                  <input type="number" id="procSize0" placeholder="Size" class="form-control"/>
+                </td>
+              </tr> 
+              <tr id="process1"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default pull-left" type="button" onClick="addProcess();">Add Process</button>
+          <button class="btn btn-default pull-left" type="button" onClick="removeProcess();">Remove Process</button>
+          <button class="btn btn-default" type="button" onClick="saveProcesses();" >Save</button>
+        </div>
+      </div>   
+    </div>
+  </div>
+  
+  <div id="editInstructionsModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Instructions</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table" id="instructionsTable">
+            <thead>
+              <tr>
+                <th>Instruction PID</th>
+                <th>Offset</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="instr0">
+                <td> 
+                  <input type="text" id="pid0" placeholder="PID" style='text-transform:uppercase' class="form-control"/>
+                </td>
+                <td> 
+                  <input type="number" id="addr0" placeholder="Address" class="form-control"/>
+                </td>
+              </tr> 
+              <tr id="instr1"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default pull-left" type="button" onClick="addInstruction();">Add Instruction</button>
+          <button class="btn btn-default pull-left" type="button" onClick="removeInstruction();">Remove Instruction</button>
+          <button class="btn btn-default" type="button" onClick="saveInstructions();">Save</button>
+        </div>
+      </div>
+    </div>
+  
+  </div> 
+  
+  <div id="fileModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Load File</h4>
+        </div>
+        <input id="loadedFile" type="file" name="loadedFile" accept=".json">
+        <button class="btn btn-default pull-right" type="button" onClick="load();"> Load</button>
+      </div>
+    </div>
+  </div>
+  
+  <a id="toSave" hidden></a> 
+    
+    
+    
+    
+
+</body>
+</html>
+
+
