@@ -13,14 +13,8 @@ var baseReg, limitReg;
 var allocationPolicy;
 
 $(document).ready(function() {
-      
-     // $("#runNextInstruction").hide();
- 
- 
       drawMainMemory();
       drawData();
-      //drawInstructions();
-   
 });
 
 function save(){
@@ -199,7 +193,7 @@ function runInstr(){
   
   if(success==false){
     //alert("Error: this address does not belong to this process");
-    $("#infoColumn").prepend("<p style='color: red'> Error: this address does not belong to this process</p> ")
+    $("#baseLimitPanel").prepend("<p style='color: red'> Error: this address does not belong to this process</p> ")
     /*$("#memoryRow"+prevBlock).removeClass("selectedMemory");
     $("#instructionRow"+(counter-1)).removeClass("selectedInstr");
     counter=0;   */
