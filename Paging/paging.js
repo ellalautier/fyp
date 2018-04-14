@@ -353,9 +353,9 @@ function drawInstructions(){
   pidColumn.appendChild(document.createTextNode("PID"));
   tr.appendChild(pidColumn);
   // offset column 
-  var offsetColumn = document.createElement("th");
-  offsetColumn.appendChild(document.createTextNode("Offset"));
-  tr.appendChild(offsetColumn);
+  var addressColumn = document.createElement("th");
+  addressColumn.appendChild(document.createTextNode("Address"));
+  tr.appendChild(addressColumn);
   
   thead.appendChild(tr);
   table.appendChild(thead);
