@@ -192,8 +192,7 @@ function runInstr(){
 
   
   if(success==false){
-    //alert("Error: this address does not belong to this process");
-    $("#baseLimitPanel").prepend("<p style='color: red'> Error: this address does not belong to this process</p> ")
+    alert("Error: this address does not belong to this process");
     /*$("#memoryRow"+prevBlock).removeClass("selectedMemory");
     $("#instructionRow"+(counter-1)).removeClass("selectedInstr");
     counter=0;   */
