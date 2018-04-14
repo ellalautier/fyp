@@ -84,9 +84,16 @@ function load(){
   
 }
 
-function loadExample(){
+function loadExample1(){
   instructionArray=[["B",50],["A",10],["B",100],["A",140],["C",70],["A",25],["D",15],["C",30],["D",175],["A",20],["E",80],["A",90],["E",5]];
   processList=[["A",200],["B",400],["C",200],["D",175], ["E", 100]] ;
+  findEntryExit(instructionArray);
+  resetAll();
+}
+
+function loadExample2(){
+  instructionArray=[["B",50],["A",10],["B",100],["A",240],["A",25],["A",20],["A",90]];
+  processList=[["A",200],["B",400]] ;
   findEntryExit(instructionArray);
   resetAll();
 }
