@@ -113,6 +113,7 @@ function saveSetup(){
   allocationPolicy=$("#memAllocPolicy").val();
   $("#nextInstrButton").show();
   resetSim();
+  alert("Succss");
 }
 
 var counter=0;
