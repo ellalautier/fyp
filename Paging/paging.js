@@ -197,6 +197,7 @@ function runInstr(){
       
       var frameNum=pageTableArray[proc][instrPage+1];
       $("#memoryRow"+frameNum).addClass("selectedMemory");
+      drawPageTables();
       $("#pageRow"+mainMemoryArray[frameNum]).addClass("selectedPage");
       $("#pageTables").prepend("<p style='text-align: center; padding-top:10px; padding-right:30px;' > " + instructionArray[counter][1]+" / "+pageSize+ " &asymp; page " + instrPage+ "</p>");
       //console.log(mainMemoryArray[frameNum]);
