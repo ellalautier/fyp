@@ -198,7 +198,7 @@ function runInstr(){
       var frameNum=pageTableArray[proc][instrPage+1];
       $("#memoryRow"+frameNum).addClass("selectedMemory");
       $("#pageRow"+mainMemoryArray[frameNum]).addClass("selectedPage");
-      $("#pageTables").prepend(instructionArray[counter][1]+" / "+pageSize+ " &asymp; page " + instrPage);
+      $("#pageTables").prepend("<p style='text-align: center' > " + instructionArray[counter][1]+" / "+pageSize+ " &asymp; page " + instrPage+ "</p>");
       //console.log(mainMemoryArray[frameNum]);
       prevBlock=frameNum;
       if(algorithm=="Least Frequently Used"){
