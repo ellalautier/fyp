@@ -132,16 +132,16 @@ function saveSetup(){
       pageSize=frameSize;
       resetSim();
       alert("Success");
-      
-      
+      algorithm=$("#swappingAlgorithm").val();
+      $("#nextInstrButton").show();
+      $(".close").click();
     }else{
       frameError=true;
       alert("Error: frame size is not a power of 2");
     }
   }
   
-  algorithm=$("#swappingAlgorithm").val();
-  $("#nextInstrButton").show();
+ 
   
 }
 

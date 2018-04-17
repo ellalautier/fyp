@@ -119,6 +119,7 @@ function saveSetup(){
   allocationPolicy=$("#memAllocPolicy").val();
   $("#nextInstrButton").show();
   alert("Success");
+  $(".close").click();
 
 }
 

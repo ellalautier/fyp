@@ -121,6 +121,7 @@ function saveSetup(){
   $("#nextInstrButton").show();
   resetSim();
   alert("Succss");
+  $(".close").click();
 }
 
 var counter=0;
