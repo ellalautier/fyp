@@ -130,10 +130,10 @@ function saveSetup(){
       
       numFrames=mainMemorySize/frameSize;
       pageSize=frameSize;
-      resetSim();
-      alert("Success");
       algorithm=$("#swappingAlgorithm").val();
       $("#nextInstrButton").show();
+      resetSim();
+      alert("Success");
       $(".close").click();
     }else{
       frameError=true;
