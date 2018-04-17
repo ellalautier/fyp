@@ -120,7 +120,12 @@ function saveSetup(){
   if(frameSize>=mainMemorySize || frameSize<=1){
     frameError=true;
     alert("Error: Invalid frame size");
+  }else if(backingStoreArray==undefined){
+    frameError=true;
+    alert("Error: No processes found");
   }
+  
+  
  
   //size power of 2
   if(frameError==false){
